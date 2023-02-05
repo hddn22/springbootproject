@@ -68,12 +68,11 @@ public class MainController {
     public String updateMessage(
             @AuthenticationPrincipal User currentUser,
             @PathVariable Long user,
-            @RequestParam("messageId") Long id,
+            @RequestParam("message") Message message,
             @RequestParam("text") String text,
             @RequestParam("tag") String tag,
             @RequestParam("file")MultipartFile file
     ) throws IOException {
-        Message message = messageRepo.findById(id);
         if(message.getAuthor().equals(currentUser)) {
             if (!StringUtils.isEmpty(text)) {
                 message.setText(text);
